@@ -1,0 +1,95 @@
+/* Empty file - all styles are in HTML */
+/* The original file didn't contain any styles as they were all inside the HTML file */
+
+@keyframes explode {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+        filter: brightness(1);
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+        filter: brightness(1.5);
+        box-shadow: 0 0 50px rgba(255, 71, 87, 0.5);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+        filter: brightness(1);
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.envelope {
+    transform-origin: center;
+    transition: transform 0.8s ease;
+}
+
+.envelope.open {
+    animation: explode 0.6s ease-out;
+    transform: rotateX(180deg);
+}
+
+.envelope-piece {
+    transition: transform 0.8s ease, box-shadow 0.8s ease;
+}
+
+.envelope.open .left-piece {
+    transform: translateX(-150%) rotateY(40deg);
+    box-shadow: 10px 0 20px rgba(0,0,0,0.2);
+}
+
+.envelope.open .right-piece {
+    transform: translateX(150%) rotateY(-40deg);
+    box-shadow: -10px 0 20px rgba(0,0,0,0.2);
+}
+
+.open-button {
+    padding: 12px 24px;
+    font-size: 1.2rem;
+    background: #ff8fa3;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.open-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.open-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.paper-note {
+    animation: float 1s ease-out forwards;
+}
+
+@keyframes float {
+    0% {
+        transform: translate(-50%, -50%) translateY(100vh);
+        box-shadow: 0 0 0 rgba(0,0,0,0);
+    }
+    70% {
+        transform: translate(-50%, -50%) translateY(-20px);
+        box-shadow: 0 20px 30px rgba(0,0,0,0.2);
+    }
+    100% {
+        transform: translate(-50%, -50%) translateY(0);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+}
