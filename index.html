@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div id="pantalla-espera">
+        <div class="flores-cayendo"></div>
+        <div class="espera-texto">Te amo Doris 💖<br>Sorpresa</div>
+        <button id="play-music-btn-espera" style="display:block; margin:40px auto 0 auto; padding:12px 32px; font-size:1.1em; background:#e75480; color:#fff; border:none; border-radius:8px; cursor:pointer; box-shadow:0 2px 8px #ffb6c1a0;">
+            Te amo bb, presiona aquí
+        </button>
+    </div>
+    <div id="contenido-principal" style="display:none;">
+        <div class="flores-cayendo" id="flores-principal"></div>
+        <div class="feliz-cumple">
+            <span class="typed-text">Feliz cumpleaños mi amor Doris</span>
+        </div>
+        <div class="cuadro-frase">
+            <span class="frase-bonita">Eres el mejor regalo que la vida me dio. Te amo mucho 💖</span>
+        </div>
+        <!-- Imagen fija debajo del texto -->
+        <div style="text-align:center; margin-top:30px;">
+            <img src="imagen/download.jpg" alt="Imagen especial" style="max-width:90vw; max-height:300px; border-radius:16px; box-shadow:0 4px 24px #ffb6c1a0;">
+            <br>
+            <button id="leer-mas-btn" class="btn-leer-mas">Leer más amor</button>
+            <div id="explosion-rosas"></div>
+        </div>
+        <button id="play-music-btn" style="display:block; margin:40px auto 0 auto; padding:12px 32px; font-size:1.1em; background:#e75480; color:#fff; border:none; border-radius:8px; cursor:pointer; box-shadow:0 2px 8px #ffb6c1a0;">
+            Te amo bb, presiona aquí
+        </button>
+        <div class="mensaje-bonito">
+            te amo amor, espero no me decepciones. No vas a encontrar a una persona igual que yo, siempre te querré. Con lo que subiste de ese video amor que no entendí, en realidad me salió una lágrima y cuando me dijiste que no me querías me empezó a doler el alma, pero te quiero y te amo. ¡Feliz cumpleaños amor!
+        </div>
+    </div>
+    <div id="pagina-leer-mas" style="display:none;">
+        <div class="flores-cayendo" id="flores-leer-mas"></div>
+        <div style="text-align:center; margin-top:60px;">
+            <h2 style="color:#e75480; font-family:'Pacifico',cursive;">¡Gracias por seguir aquí, mi amor! 💖</h2>
+            <button id="volver-btn" class="btn-leer-mas" style="margin-top:30px;">Volver</button>
+            <img id="img-amor" src="imagen/amor.jpg" alt="Amor" style="max-width:180px; max-height:180px; border-radius:12px; margin:18px auto 0 auto; box-shadow:0 2px 12px #ffb6c1a0; display:block; cursor:pointer;">
+            <div id="modal-img-amor" class="modal-img-amor">
+                <img src="imagen/amor.jpg" alt="Amor grande">
+                <div class="mensaje-modal-amor">
+                    <span id="typed-modal-text"></span>
+                </div>
+            </div>
+            <div class="mensaje-bajo-foto">
+                <span id="typed-bajo-foto"></span>
+            </div>
+            <div class="botones-aceptar-no">
+                <button id="btn-aceptar" class="btn-accion">Aceptar</button>
+                <span id="num-aceptar" class="num-accion">0</span>
+                <button id="btn-noaceptar" class="btn-accion" style="margin-left:32px;">No aceptar</button>
+                <span id="num-noaceptar" class="num-accion">0</span>
+            </div>
+            <div class="mensaje-final-bonito">
+                <span id="typed-mensaje-final"></span>
+            </div>
+        </div>
+    </div>
+    <audio id="musica-fondo" src="musica/°Mi Kryptonita - Doble ONE (Slowed and Reverb)°.mp3" autoplay loop hidden></audio>
+    <script>
+        // Animación de flores en pantalla de espera
+        const flores = ["🌸","🌺","💮","🌼"];
+        const contenedor = document.querySelector('#pantalla-espera .flores-cayendo');
+        for(let i=0; i<18; i++) {
+            const flor = document.createElement('span');
+            flor.className = 'flor';
+            flor.textContent = flores[Math.floor(Math.random()*flores.length)];
+            flor.style.left = Math.random() * 100 + 'vw';
+            flor.style.animationDelay = (Math.random() * 5) + 's';
+            flor.style.fontSize = (1.5 + Math.random()*1.5) + 'em';
+            contenedor.appendChild(flor);
+        }
+
+        // Música de fondo
+        const musica = document.getElementById('musica-fondo');
+        musica.volume = 0.7;
+
+        // Botón play en pantalla de espera
+        document.getElementById('play-music-btn-espera').onclick = () => {
+            musica.play();
+        };
+
+        // Botón play en página principal
+        document.getElementById('play-music-btn').onclick = () => {
+            musica.play();
+        };
+
+        // Espera 6 segundos y muestra el contenido principal
+        setTimeout(() => {
+            document.getElementById('pantalla-espera').style.display = 'none';
+            document.getElementById('contenido-principal').style.display = '';
+        }, 6000);
+
+        // Intentar reproducir automáticamente la música al cargar la página
+        window.addEventListener('DOMContentLoaded', () => {
+            musica.play().catch(() => {
+                document.body.addEventListener('click', () => musica.play(), { once: true });
+            });
+        });
+
+        // Animación de flores en página principal
+        function generarFlores(contenedor) {
+            const flores = ["🌸","🌺","💮","🌼"];
+            for(let i=0; i<18; i++) {
+                const flor = document.createElement('span');
+                flor.className = 'flor';
+                flor.textContent = flores[Math.floor(Math.random()*flores.length)];
+                flor.style.left = Math.random() * 100 + 'vw';
+                flor.style.animationDelay = (Math.random() * 5) + 's';
+                flor.style.fontSize = (1.5 + Math.random()*1.5) + 'em';
+                contenedor.appendChild(flor);
+            }
+        }
+        generarFlores(document.querySelector('#pantalla-espera .flores-cayendo'));
+
+        setTimeout(() => {
+            document.getElementById('pantalla-espera').style.display = 'none';
+            document.getElementById('contenido-principal').style.display = '';
+            generarFlores(document.getElementById('flores-principal'));
+        }, 6000);
+
+        // Explosión de rosas y mostrar sección "leer más" sin recargar
+        document.getElementById('leer-mas-btn').onclick = function(e) {
+            e.preventDefault();
+            const explosion = document.getElementById('explosion-rosas');
+            explosion.innerHTML = '';
+            for(let i=0; i<18; i++) {
+                const rosa = document.createElement('span');
+                rosa.className = 'rosa-explosion';
+                rosa.textContent = '🌹';
+                rosa.style.left = '50%';
+                rosa.style.top = '50%';
+                rosa.style.animationDelay = (Math.random() * 0.3) + 's';
+                explosion.appendChild(rosa);
+            }
+            explosion.style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('contenido-principal').style.display = 'none';
+                document.getElementById('pagina-leer-mas').style.display = '';
+                // Generar flores en la nueva sección si no existen
+                if (!document.getElementById('flores-leer-mas').hasChildNodes()) {
+                    generarFlores(document.getElementById('flores-leer-mas'));
+                }
+            }, 900);
+        };
+
+        // Botón para volver a la página principal
+        document.getElementById('volver-btn').onclick = function() {
+            document.getElementById('pagina-leer-mas').style.display = 'none';
+            document.getElementById('contenido-principal').style.display = '';
+        };
+
+        // Función para generar flores animadas
+        function generarFlores(contenedor) {
+            const flores = ["🌸","🌺","💮","🌼"];
+            for(let i=0; i<18; i++) {
+                const flor = document.createElement('span');
+                flor.className = 'flor';
+                flor.textContent = flores[Math.floor(Math.random()*flores.length)];
+                flor.style.left = Math.random() * 100 + 'vw';
+                flor.style.animationDelay = (Math.random() * 5) + 's';
+                flor.style.fontSize = (1.5 + Math.random()*1.5) + 'em';
+                contenedor.appendChild(flor);
+            }
+        }
+        generarFlores(document.getElementById('flores-principal'));
+        generarFlores(document.getElementById('flores-leer-mas'));
+
+        // Agrandar imagen al hacer click y cerrarla después de 10 segundos
+        const imgAmor = document.getElementById('img-amor');
+        const modalImgAmor = document.getElementById('modal-img-amor');
+        const typedModalText = document.getElementById('typed-modal-text');
+        let modalTimeout = null;
+        const mensaje = "Te amo amor, eres lo mejor que me ha pasado en la vida.\nEres como mi alma, no me decepciones.\nI love you";
+
+        imgAmor.onclick = function() {
+            modalImgAmor.style.display = 'flex';
+            typedModalText.textContent = '';
+            escribirTextoModal(mensaje, 0);
+            clearTimeout(modalTimeout);
+            modalTimeout = setTimeout(() => {
+                modalImgAmor.style.display = 'none';
+            }, 10000);
+        };
+
+        function escribirTextoModal(texto, i) {
+            if (i < texto.length) {
+                typedModalText.textContent += texto[i] === '\n' ? '\n' : texto[i];
+                setTimeout(() => escribirTextoModal(texto, i + 1), 40);
+            }
+        }
+
+        modalImgAmor.onclick = function(e) {
+            if (e.target === modalImgAmor) {
+                modalImgAmor.style.display = 'none';
+                clearTimeout(modalTimeout);
+            }
+        };
+
+        // Texto que se escribe solo debajo de la foto
+        const mensajeBajoFoto = "¿Aceptas ser mi novia para siempre y mi esposa? No me decepciones, te amo. Cuando llegue allá haremos una familia y prometo nunca, nunca te haré daño, más bien te protegeré y te protegeré de todo lo malo.";
+        const typedBajoFoto = document.getElementById('typed-bajo-foto');
+        function escribirTextoBajoFoto(texto, i) {
+            if (i < texto.length) {
+                typedBajoFoto.textContent += texto[i];
+                setTimeout(() => escribirTextoBajoFoto(texto, i + 1), 38);
+            }
+        }
+        // Iniciar animación al mostrar la página leer más
+        const leerMasBtn = document.getElementById('leer-mas-btn');
+        if (leerMasBtn) {
+            leerMasBtn.onclick = function(e) {
+                e.preventDefault();
+                const explosion = document.getElementById('explosion-rosas');
+                explosion.innerHTML = '';
+                for(let i=0; i<18; i++) {
+                    const rosa = document.createElement('span');
+                    rosa.className = 'rosa-explosion';
+                    rosa.textContent = '🌹';
+                    rosa.style.left = '50%';
+                    rosa.style.top = '50%';
+                    rosa.style.animationDelay = (Math.random() * 0.3) + 's';
+                    explosion.appendChild(rosa);
+                }
+                explosion.style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('contenido-principal').style.display = 'none';
+                    document.getElementById('pagina-leer-mas').style.display = '';
+                    // Generar flores en la nueva sección si no existen
+                    if (!document.getElementById('flores-leer-mas').hasChildNodes()) {
+                        generarFlores(document.getElementById('flores-leer-mas'));
+                    }
+                }, 900);
+                // Reiniciar texto animado bajo la foto
+                typedBajoFoto.textContent = '';
+                setTimeout(() => {
+                    escribirTextoBajoFoto(mensajeBajoFoto, 0);
+                }, 950);
+                // Reiniciar texto animado final
+                typedMensajeFinal.textContent = '';
+                setTimeout(() => {
+                    escribirMensajeFinal(mensajeFinal, 0);
+                }, 950);
+            };
+        }
+        // También al volver desde el modal, si es necesario
+        modalImgAmor.onclick = function(e) {
+            if (e.target === modalImgAmor) {
+                modalImgAmor.style.display = 'none';
+                clearTimeout(modalTimeout);
+                // Reiniciar texto animado bajo la foto
+                typedBajoFoto.textContent = '';
+                setTimeout(() => {
+                    escribirTextoBajoFoto(mensajeBajoFoto, 0);
+                }, 950);
+                // Reiniciar texto animado final
+                typedMensajeFinal.textContent = '';
+                setTimeout(() => {
+                    escribirMensajeFinal(mensajeFinal, 0);
+                }, 950);
+            }
+        };
+
+        // Botones aceptar/no aceptar solo en la segunda página
+        const btnAceptar = document.getElementById('btn-aceptar');
+        const btnNoAceptar = document.getElementById('btn-noaceptar');
+        const numAceptar = document.getElementById('num-aceptar');
+        const numNoAceptar = document.getElementById('num-noaceptar');
+
+        btnAceptar.onclick = function() {
+            numAceptar.textContent = '1';
+            btnAceptar.disabled = true;
+            btnNoAceptar.disabled = true;
+        };
+        btnNoAceptar.onclick = function() {
+            numNoAceptar.textContent = '1';
+            btnAceptar.disabled = true;
+            btnNoAceptar.disabled = true;
+        };
+
+        // Botón para reproducir la música que te prometí
+        const btnEscucharPromesa = document.getElementById('btn-escuchar-promesa');
+        if (btnEscucharPromesa) {
+            btnEscucharPromesa.onclick = function() {
+                const musica = document.getElementById('musica-fondo');
+                musica.play();
+            };
+        }
+
+        // Texto que se escribe solo al final de la segunda página
+        const mensajeFinal = "Gracias por todo lo que me haces feliz amor, te quiero mucho y te amooooooooooo";
+        const typedMensajeFinal = document.getElementById('typed-mensaje-final');
+        function escribirMensajeFinal(texto, i) {
+            if (i < texto.length) {
+                typedMensajeFinal.textContent += texto[i];
+                setTimeout(() => escribirMensajeFinal(texto, i + 1), 38);
+            }
+        }
+    </script>
+</body>
+</html>

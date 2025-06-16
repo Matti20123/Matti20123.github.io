@@ -1,0 +1,70 @@
+.flores-cayendo {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2100;
+    overflow: hidden;
+}
+
+.flor {
+    position: absolute;
+    top: -50px;
+    font-size: 2em;
+    opacity: 0.85;
+    animation: caer 6s linear infinite;
+    user-select: none;
+    will-change: transform;
+}
+
+@keyframes caer {
+    0% {
+        transform: translateY(-50px) rotate(0deg) scale(1);
+        opacity: 0.85;
+    }
+    80% {
+        opacity: 0.85;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg) scale(1.2);
+        opacity: 0.2;
+    }
+}
+
+#explosion-rosas {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 3000;
+    display: none;
+}
+
+.rosa-explosion {
+    position: absolute;
+    font-size: 2em;
+    animation: rosa-explode 0.8s forwards;
+    opacity: 0.9;
+}
+
+@keyframes rosa-explode {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        /* Distribuye las rosas en círculo */
+        transform: translate(
+            calc(-50% + 180px * cos(var(--i))),
+            calc(-50% + 180px * sin(var(--i)))
+        ) scale(2.2);
+        opacity: 0;
+    }
+}

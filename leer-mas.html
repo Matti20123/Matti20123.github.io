@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Leer más amor</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="flores-cayendo" id="flores-leer-mas"></div>
+    <div style="text-align:center; margin-top:60px;">
+        <h2 style="color:#e75480; font-family:'Pacifico',cursive;">¡Gracias por seguir aquí, mi amor! 💖</h2>
+        <p style="font-family:'Quicksand',sans-serif; color:#e75480; max-width:340px; margin:0 auto;">
+            Aquí puedes escribir un mensaje especial, una carta o lo que desees compartir con Doris.
+        </p>
+    </div>
+    <audio id="musica-fondo" src="musica/Mi Kryptonita - Doble ONE (Slowed and Reverb).mp3" autoplay loop hidden></audio>
+    <script>
+        // Animación de flores
+        function generarFlores(contenedor) {
+            const flores = ["🌸","🌺","💮","🌼"];
+            for(let i=0; i<18; i++) {
+                const flor = document.createElement('span');
+                flor.className = 'flor';
+                flor.textContent = flores[Math.floor(Math.random()*flores.length)];
+                flor.style.left = Math.random() * 100 + 'vw';
+                flor.style.animationDelay = (Math.random() * 5) + 's';
+                flor.style.fontSize = (1.5 + Math.random()*1.5) + 'em';
+                contenedor.appendChild(flor);
+            }
+        }
+        generarFlores(document.getElementById('flores-leer-mas'));
+
+        // Música de fondo (continúa)
+        const musica = document.getElementById('musica-fondo');
+        musica.volume = 0.7;
+        window.addEventListener('DOMContentLoaded', () => {
+            musica.play().catch(() => {
+                document.body.addEventListener('click', () => musica.play(), { once: true });
+            });
+        });
+    </script>
+</body>
+</html>
